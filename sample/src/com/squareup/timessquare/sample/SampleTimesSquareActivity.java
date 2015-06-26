@@ -3,6 +3,7 @@ package com.squareup.timessquare.sample;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -62,13 +63,14 @@ public class SampleTimesSquareActivity extends Activity {
     modeButtons.addAll(Arrays.asList(single, multi, range, displayOnly, decorator));
 
     single.setOnClickListener(new OnClickListener() {
-      @Override public void onClick(View v) {
+      @Override
+      public void onClick(View v) {
         setButtonsEnabled(single);
 
         calendar.setDecorators(Collections.<CalendarCellDecorator>emptyList());
         calendar.init(lastYear.getTime(), nextYear.getTime()) //
-            .inMode(SelectionMode.SINGLE) //
-            .withSelectedDate(new Date());
+                .inMode(SelectionMode.SINGLE) //
+                .withSelectedDate(new Date());
       }
     });
 
@@ -155,10 +157,18 @@ public class SampleTimesSquareActivity extends Activity {
     });
 
     findViewById(R.id.done_button).setOnClickListener(new OnClickListener() {
-      @Override public void onClick(View view) {
+      @Override
+      public void onClick(View view) {
         Log.d(TAG, "Selected time in millis: " + calendar.getSelectedDate().getTime());
         String toast = "Selected: " + calendar.getSelectedDate().getTime();
         Toast.makeText(SampleTimesSquareActivity.this, toast, LENGTH_SHORT).show();
+      }
+    });
+
+    findViewById(R.id.btn_single_month).setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        startActivity(new Intent(SampleTimesSquareActivity.this, SingleMonthActivity.class));
       }
     });
   }

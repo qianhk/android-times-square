@@ -34,6 +34,13 @@ public class MonthView extends LinearLayout {
       int dayBackgroundResId, int dayTextColorResId, int titleTextColor, boolean displayHeader,
       int headerTextColor, List<CalendarCellDecorator> decorators, Locale locale) {
     final MonthView view = (MonthView) inflater.inflate(R.layout.month, parent, false);
+    initMothViewProperty(weekdayNameFormat, listener, today, dividerColor, dayBackgroundResId, dayTextColorResId, titleTextColor, displayHeader, headerTextColor, decorators, locale, view);
+    return view;
+  }
+
+  public static void initMothViewProperty(DateFormat weekdayNameFormat, Listener listener, Calendar today, int dividerColor
+          , int dayBackgroundResId, int dayTextColorResId, int titleTextColor, boolean displayHeader
+          , int headerTextColor, List<CalendarCellDecorator> decorators, Locale locale, MonthView view) {
     view.setDividerColor(dividerColor);
     view.setDayTextColor(dayTextColorResId);
     view.setTitleTextColor(titleTextColor);
@@ -57,7 +64,6 @@ public class MonthView extends LinearLayout {
     today.set(Calendar.DAY_OF_WEEK, originalDayOfWeek);
     view.listener = listener;
     view.decorators = decorators;
-    return view;
   }
 
   private static int getDayOfWeek(int firstDayOfWeek, int offset, boolean isRtl) {

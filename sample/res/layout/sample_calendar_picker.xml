@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.squareup.timessquare.sample"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
   <HorizontalScrollView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -78,6 +77,11 @@
       android:scrollbarStyle="outsideOverlay"
       android:clipToPadding="false"
       android:background="#FFFFFF"
+      app:dayBackground="@drawable/custom_calendar_bg_selector"
+      app:dayTextColor="@color/custom_calendar_text_selector"
+      app:dividerColor="@color/transparent"
+      app:titleTextColor="@color/custom_calendar_text_selector"
+      app:headerTextColor="@color/custom_header_text"
       />
   <Button
       android:id="@+id/done_button"
@@ -85,4 +89,9 @@
       android:layout_height="wrap_content"
       android:text="Done"
       />
+    <Button
+        android:id="@+id/btn_single_month"
+        android:text="single Month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
