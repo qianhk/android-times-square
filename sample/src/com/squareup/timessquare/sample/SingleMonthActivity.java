@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import com.squareup.timessquare.Logr;
 import com.squareup.timessquare.MonthCellDescriptor;
 import com.squareup.timessquare.MonthDescriptor;
 import com.squareup.timessquare.MonthView;
@@ -53,8 +54,10 @@ public class SingleMonthActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Logr.d("lookMonth onCreate");
         setContentView(R.layout.single_month_page);
-//        MonthView monthView = (MonthView) findViewById(R.id.month_view);
+        MonthView monthView = (MonthView) findViewById(R.id.month_view);
+        Logr.d("lookMonth findViewById month_view");
 
         Locale locale = Locale.getDefault();
         Calendar today = Calendar.getInstance(locale);
@@ -73,13 +76,13 @@ public class SingleMonthActivity extends Activity {
         boolean displayHeader = true;
         int headerTextColor = res.getColor(com.squareup.timessquare.R.color.calendar_text_active);
 
-        final ViewGroup rootView = (ViewGroup) findViewById(R.id.layout_root);
-        final MonthView monthView = MonthView.create(rootView, LayoutInflater.from(this)
-                , weekdayNameFormat, listener, today, dividerColor,
-                dayBackgroundResId, dayTextColorResId, titleTextColor, displayHeader,
-                headerTextColor, null, locale);
-        final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        rootView.addView(monthView, layoutParams);
+//        final ViewGroup rootView = (ViewGroup) findViewById(R.id.layout_root);
+//        final MonthView monthView = MonthView.create(rootView, LayoutInflater.from(this)
+//                , weekdayNameFormat, listener, today, dividerColor,
+//                dayBackgroundResId, dayTextColorResId, titleTextColor, displayHeader,
+//                headerTextColor, null, locale);
+//        final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//        rootView.addView(monthView, layoutParams);
 
         final List<MonthDescriptor> months = new ArrayList<MonthDescriptor>();
         final List<List<List<MonthCellDescriptor>>> cells =
@@ -101,6 +104,7 @@ public class SingleMonthActivity extends Activity {
             monthCounter.add(MONTH, 1);
         }
 
+        Logr.d("lookMonth will init monthView");
         final int position = 0;
         monthView.init(months.get(position), cells.get(position), true, null,
                 null);
