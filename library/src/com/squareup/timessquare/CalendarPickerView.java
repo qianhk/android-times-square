@@ -408,7 +408,7 @@ public class CalendarPickerView extends ListView {
     }
 
     /**
-     * Sets the typeface to be used within the date grid.
+     * Sets the typeface to be used within the date mGridView.
      */
     public void setDateTypeface(Typeface dateTypeface) {
         this.dateTypeface = dateTypeface;
@@ -439,7 +439,7 @@ public class CalendarPickerView extends ListView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (months.isEmpty()) {
             throw new IllegalStateException(
-                    "Must have at least one month to display.  Did you forget to call init()?");
+                    "Must have at least one month to display.  Did you forget to call initData()?");
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
@@ -458,7 +458,7 @@ public class CalendarPickerView extends ListView {
     }
 
     /**
-     * Returns a string summarizing what the client sent us for init() params.
+     * Returns a string summarizing what the client sent us for initData() params.
      */
     private static String dbg(Date minDate, Date maxDate) {
         return "minDate: " + minDate + "\nmaxDate: " + maxDate;
@@ -759,15 +759,14 @@ public class CalendarPickerView extends ListView {
         public View getView(int position, View convertView, ViewGroup parent) {
             MonthView monthView = (MonthView) convertView;
             if (monthView == null) {
-                monthView =
-                        MonthView.create(parent, inflater, weekdayNameFormat, listener, today, dividerColor,
-                                dayBackgroundResId, dayTextColorResId, titleTextColor, displayHeader,
-                                headerTextColor, decorators, locale);
+                monthView = new MonthView(parent.getContext());
+                monthView.initMothViewProperty(weekdayNameFormat, listener, today, dividerColor,
+                        dayBackgroundResId, dayTextColorResId, titleTextColor, displayHeader,
+                        headerTextColor, decorators, locale);
             } else {
-                monthView.setDecorators(decorators);
+                monthView.setDecoratorList(decorators);
             }
-            monthView.init(months.get(position), cells.get(position), displayOnly, titleTypeface,
-                    dateTypeface);
+            monthView.initData(months.get(position), cells.get(position), displayOnly, titleTypeface, dateTypeface);
             return monthView;
         }
     }

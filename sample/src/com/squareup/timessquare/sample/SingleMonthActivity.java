@@ -3,9 +3,6 @@ package com.squareup.timessquare.sample;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import com.squareup.timessquare.Logr;
 import com.squareup.timessquare.MonthCellDescriptor;
 import com.squareup.timessquare.MonthDescriptor;
@@ -104,9 +101,9 @@ public class SingleMonthActivity extends Activity {
             monthCounter.add(MONTH, 1);
         }
 
-        Logr.d("lookMonth will init monthView");
+        Logr.d("lookMonth will initData monthView");
         final int position = 0;
-        monthView.init(months.get(position), cells.get(position), true, null,
+        monthView.initData(months.get(position), cells.get(position), true, null,
                 null);
     }
 
