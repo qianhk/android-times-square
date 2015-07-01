@@ -21,28 +21,11 @@ public class MonthView extends LinearLayout {
     private List<CalendarCellDecorator> mDecoratorList;
     private boolean mRtl;
 
-//    public static MonthView create(ViewGroup parent, LayoutInflater inflater,
-//                                   DateFormat weekdayNameFormat, Listener mListener, Calendar today, int dividerColor,
-//                                   int dayBackgroundResId, int dayTextColorResId, int titleTextColor, boolean displayHeader,
-//                                   int headerTextColor, Locale locale) {
-//        return create(parent, inflater, weekdayNameFormat, mListener, today, dividerColor,
-//                dayBackgroundResId, dayTextColorResId, titleTextColor, displayHeader, headerTextColor, null,
-//                locale);
-//    }
-
-//    public static MonthView create(ViewGroup parent, LayoutInflater inflater,
-//                                   DateFormat weekdayNameFormat, Listener mListener, Calendar today, int dividerColor,
-//                                   int dayBackgroundResId, int dayTextColorResId, int titleTextColor, boolean displayHeader,
-//                                   int headerTextColor, List<CalendarCellDecorator> mDecoratorList, Locale locale) {
-//        final MonthView view = (MonthView) inflater.inflate(R.layout.month, parent, false);
-//        initMothViewProperty(weekdayNameFormat, mListener, today, dividerColor, dayBackgroundResId, dayTextColorResId, titleTextColor, displayHeader, headerTextColor, mDecoratorList, locale, view);
-//        return view;
-//    }
-
     public void initMothViewProperty(DateFormat weekdayNameFormat, Listener listener, Calendar today, int dividerColor
             , int dayBackgroundResId, int dayTextColorResId, int titleTextColor, boolean displayHeader
             , int headerTextColor, List<CalendarCellDecorator> decorators, Locale locale) {
         MonthView view = this;
+        Logr.d("lookMonth initMothViewProperty childCount=%d", getChildCount());
         view.setDividerColor(dividerColor);
         view.setDayTextColor(dayTextColorResId);
         view.setTitleTextColor(titleTextColor);
@@ -115,9 +98,9 @@ public class MonthView extends LinearLayout {
 //    @Override
 //    protected void onFinishInflate() {
 //        super.onFinishInflate();
-//        Logr.d("lookMonth onFinishInflate");
-//        mTvTitle = (TextView) findViewById(R.id.mTvTitle);
-//        mGridView = (CalendarGridView) findViewById(R.id.calendar_grid);
+//        Logr.d("lookMonth onFinishInflate childCount=%d", getChildCount());
+////        mTvTitle = (TextView) findViewById(R.id.mTvTitle);
+////        mGridView = (CalendarGridView) findViewById(R.id.calendar_grid);
 //    }
 
     public void initData(MonthDescriptor month, List<List<MonthCellDescriptor>> cells,
@@ -196,6 +179,12 @@ public class MonthView extends LinearLayout {
 
     public void setHeaderTextColor(int color) {
         mGridView.setHeaderTextColor(color);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        Logr.d("lookMonth onLayout childCount=%d", getChildCount());
     }
 
     public interface Listener {

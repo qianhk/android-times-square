@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_root"
     android:orientation="vertical"
-    android:background="#FAF"
+    android:background="#FFF"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.squareup.timessquare.MonthView
         android:id="@+id/month_view"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
