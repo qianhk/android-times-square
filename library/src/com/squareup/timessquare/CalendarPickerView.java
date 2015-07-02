@@ -98,19 +98,19 @@ public class CalendarPickerView extends ListView {
         super(context, attrs);
 
         Resources res = context.getResources();
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CalendarPickerView);
-        final int bg = a.getColor(R.styleable.CalendarPickerView_android_background,
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MonthView);
+        final int bg = a.getColor(R.styleable.MonthView_android_background,
                 res.getColor(R.color.calendar_bg));
-        dividerColor = a.getColor(R.styleable.CalendarPickerView_dividerColor,
+        dividerColor = a.getColor(R.styleable.MonthView_dividerColor,
                 res.getColor(R.color.calendar_divider));
-        dayBackgroundResId = a.getResourceId(R.styleable.CalendarPickerView_dayBackground,
+        dayBackgroundResId = a.getResourceId(R.styleable.MonthView_dayBackground,
                 R.drawable.calendar_bg_selector);
-        dayTextColorResId = a.getResourceId(R.styleable.CalendarPickerView_dayTextColor,
+        dayTextColorResId = a.getResourceId(R.styleable.MonthView_dayTextColor,
                 R.color.calendar_text_selector);
-        titleTextColor = a.getColor(R.styleable.CalendarPickerView_titleTextColor,
+        titleTextColor = a.getColor(R.styleable.MonthView_titleTextColor,
                 res.getColor(R.color.calendar_text_active));
-        displayHeader = a.getBoolean(R.styleable.CalendarPickerView_displayHeader, true);
-        headerTextColor = a.getColor(R.styleable.CalendarPickerView_headerTextColor,
+        displayHeader = a.getBoolean(R.styleable.MonthView_displayHeader, true);
+        headerTextColor = a.getColor(R.styleable.MonthView_headerTextColor,
                 res.getColor(R.color.calendar_text_active));
         a.recycle();
 

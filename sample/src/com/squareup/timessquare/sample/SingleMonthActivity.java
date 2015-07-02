@@ -64,14 +64,6 @@ public class SingleMonthActivity extends Activity {
         SimpleDateFormat weekdayNameFormat = new SimpleDateFormat(getString(com.squareup.timessquare.R.string.day_name_format), locale);
         DateFormat fullDateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
 
-        Resources res = getResources();
-        final int bg = res.getColor(com.squareup.timessquare.R.color.calendar_bg);
-        int dividerColor = res.getColor(com.squareup.timessquare.R.color.calendar_divider);
-        int dayBackgroundResId = com.squareup.timessquare.R.drawable.calendar_bg_selector;
-        int dayTextColorResId = com.squareup.timessquare.R.color.calendar_text_selector;
-        int titleTextColor = res.getColor(com.squareup.timessquare.R.color.calendar_text_active);
-        boolean displayHeader = true;
-        int headerTextColor = res.getColor(com.squareup.timessquare.R.color.calendar_text_active);
 
 //        final ViewGroup rootView = (ViewGroup) findViewById(R.id.layout_root);
 //        final MonthView monthView = MonthView.create(rootView, LayoutInflater.from(this)
@@ -103,7 +95,7 @@ public class SingleMonthActivity extends Activity {
 
         Logr.d("lookMonth will initData monthView");
         final int position = 0;
-        monthView.initData(months.get(position), cells.get(position), true, null,
+        monthView.initData(months.get(position), cells.get(position), false, null,
                 null);
     }
 

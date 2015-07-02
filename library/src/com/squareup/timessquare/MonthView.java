@@ -2,6 +2,8 @@
 package com.squareup.timessquare;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -76,6 +78,23 @@ public class MonthView extends LinearLayout {
         super(context, attrs);
         Logr.d("lookMonth construct MonthView, two param");
         initConstruct(context);
+
+        Resources res = context.getResources();
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MonthView);
+        setBackgroundColor(a.getColor(R.styleable.MonthView_android_background,
+                res.getColor(R.color.calendar_bg)));
+        setDividerColor(a.getColor(R.styleable.MonthView_dividerColor,
+                res.getColor(R.color.calendar_divider)));
+        setDayTextColor(a.getResourceId(R.styleable.MonthView_dayTextColor,
+                R.color.calendar_text_selector));
+        setTitleTextColor(a.getColor(R.styleable.MonthView_titleTextColor,
+                res.getColor(R.color.calendar_text_active)));
+        setDisplayHeader(a.getBoolean(R.styleable.MonthView_displayHeader, true));
+        setHeaderTextColor(a.getColor(R.styleable.MonthView_headerTextColor,
+                res.getColor(R.color.calendar_text_active)));
+        setDayBackground(a.getResourceId(R.styleable.MonthView_dayBackground,
+                R.drawable.calendar_bg_selector));
+        a.recycle();
     }
 
     private void initConstruct(Context context) {
