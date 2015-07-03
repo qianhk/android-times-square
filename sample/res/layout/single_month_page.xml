@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.squareup.timessquare.MonthView
+    <com.squareup.timessquare.CalendarView
         android:id="@+id/month_view"
         android:orientation="vertical"
         android:layout_width="match_parent"

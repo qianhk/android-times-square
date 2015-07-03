@@ -16,12 +16,13 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class MonthView extends LinearLayout {
+class MonthView extends LinearLayout {
+
     private TextView mTvTitle;
     private CalendarGridView mGridView;
-    private Listener mListener;
     private List<CalendarCellDecorator> mDecoratorList;
     private boolean mRtl;
+    private Listener mListener;
 
     public void initMothViewProperty(DateFormat weekdayNameFormat, Listener listener, Calendar today, int dividerColor
             , int dayBackgroundResId, int dayTextColorResId, int titleTextColor, boolean displayHeader
@@ -51,6 +52,10 @@ public class MonthView extends LinearLayout {
         today.set(Calendar.DAY_OF_WEEK, originalDayOfWeek);
         view.mListener = listener;
         view.mDecoratorList = decorators;
+    }
+
+    public void setListener(Listener listener) {
+        mListener = listener;
     }
 
     private static int getDayOfWeek(int firstDayOfWeek, int offset, boolean isRtl) {
@@ -122,20 +127,37 @@ public class MonthView extends LinearLayout {
 ////        mGridView = (CalendarGridView) findViewById(R.id.calendar_grid);
 //    }
 
+    private MonthDescriptor mMonthDescriptor;
+    private List<List<MonthCellDescriptor>> mCellList;
+    private boolean mDisplayOnly;
+
     public void initData(MonthDescriptor month, List<List<MonthCellDescriptor>> cells,
                          boolean displayOnly, Typeface titleTypeface, Typeface dateTypeface) {
         Logr.d("lookMonth Initializing MonthView (%d) for %s", System.identityHashCode(this), month);
-        long start = System.currentTimeMillis();
-        mTvTitle.setText(month.getLabel());
+        mMonthDescriptor = month;
+        mCellList = cells;
+        mDisplayOnly = displayOnly;
 
-        final int numRows = cells.size();
+        if (titleTypeface != null) {
+            mTvTitle.setTypeface(titleTypeface);
+        }
+        if (dateTypeface != null) {
+            mGridView.setTypeface(dateTypeface);
+        }
+        flushView();
+    }
+
+    public void flushView() {
+        mTvTitle.setText(mMonthDescriptor.getLabel());
+
+        final int numRows = mCellList.size();
         mGridView.setNumRows(numRows);
         for (int i = 0; i < 6; i++) {
             CalendarRowView weekRow = (CalendarRowView) mGridView.getChildAt(i + 1);
             weekRow.setListener(mListener);
             if (i < numRows) {
                 weekRow.setVisibility(VISIBLE);
-                List<MonthCellDescriptor> week = cells.get(i);
+                List<MonthCellDescriptor> week = mCellList.get(i);
                 for (int c = 0; c < week.size(); c++) {
                     MonthCellDescriptor cell = week.get(mRtl ? 6 - c : c);
                     CalendarCellView cellView = (CalendarCellView) weekRow.getChildAt(c);
@@ -145,7 +167,7 @@ public class MonthView extends LinearLayout {
                         cellView.setText(cellDate);
                     }
                     cellView.setEnabled(cell.isCurrentMonth());
-                    cellView.setClickable(!displayOnly);
+                    cellView.setClickable(!mDisplayOnly);
 
                     cellView.setSelectable(cell.isSelectable());
                     cellView.setSelected(cell.isSelected());
@@ -165,15 +187,6 @@ public class MonthView extends LinearLayout {
                 weekRow.setVisibility(GONE);
             }
         }
-
-        if (titleTypeface != null) {
-            mTvTitle.setTypeface(titleTypeface);
-        }
-        if (dateTypeface != null) {
-            mGridView.setTypeface(dateTypeface);
-        }
-
-        Logr.d("MonthView.initData took %d ms", System.currentTimeMillis() - start);
     }
 
     public void setDividerColor(int color) {
