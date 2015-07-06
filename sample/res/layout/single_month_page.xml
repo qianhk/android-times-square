@@ -12,11 +12,10 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        app:dayBackground="@drawable/custom_calendar_bg_selector"
-        app:dayTextColor="@color/custom_calendar_text_selector"
+        app:dayBackground="@drawable/yd_calendar_day_bkg_selector"
+        app:dayTextColor="@color/yd_calendar_day_text_selector"
         app:dividerColor="@color/transparent"
-        app:titleTextColor="@color/custom_calendar_text_selector"
-        app:headerTextColor="@color/custom_header_text"
+        app:titleTextColor="@color/yd_calendar_day_text_selector"
+        app:headerTextColor="@color/yd_calendar_day_text_selector"
         />
 </LinearLayout>

@@ -3,15 +3,15 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <solid android:color="@color/custom_background"/>
+            <solid android:color="@color/transparent"/>
         </shape>
     </item>
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/custom_background_today"/>
+            <solid android:color="@color/orange"/>
             <stroke
                     android:width="@dimen/dimen_margin_circle"
-                    android:color="@color/transparent"/>
+                    android:color="@color/orange"/>
         </shape>
     </item>
 </layer-list>
