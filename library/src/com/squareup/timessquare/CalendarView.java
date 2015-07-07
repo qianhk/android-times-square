@@ -133,7 +133,7 @@ public class CalendarView extends MonthView {
             for (int c = 0; c < 7; c++) {
                 Date date = cal.getTime();
                 boolean isCurrentMonth = cal.get(MONTH) == month.getMonth();
-                boolean isSelected = CalendarPickerView.containsDate(mSelectedCalendarList, cal);
+                boolean isSelected = isCurrentMonth && CalendarPickerView.containsDate(mSelectedCalendarList, cal);
                 boolean isSelectable = true;
                 boolean isToday = CalendarPickerView.sameDate(cal, mTodayCalendar);
                 boolean isHighlighted = false;
