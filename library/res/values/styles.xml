@@ -1,8 +1,8 @@
 <!-- Copyright 2012 Square, Inc. -->
 <resources>
   <style name="CalendarTitle">
-    <item name="android:textSize">@dimen/calendar_text_medium</item>
-    <item name="android:textStyle">bold</item>
+    <item name="android:textSize">@dimen/calendar_text_size</item>
+    <item name="android:textStyle">normal</item>
   </style>
 
   <style name="CalendarCell">
@@ -13,11 +13,11 @@
   </style>
 
   <style name="CalendarCell.DayHeader">
-    <item name="android:textSize">@dimen/calendar_text_small</item>
+    <item name="android:textSize">@dimen/calendar_text_size</item>
   </style>
 
   <style name="CalendarCell.CalendarDate">
-    <item name="android:textSize">14sp</item>
+    <item name="android:textSize">@dimen/calendar_text_size</item>
     <item name="android:clickable">true</item>
     <item name="android:textStyle">normal</item>
   </style>

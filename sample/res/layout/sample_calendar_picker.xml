@@ -82,6 +82,7 @@
       app:dividerColor="@color/transparent"
       app:titleTextColor="@color/custom_calendar_text_selector"
       app:headerTextColor="@color/custom_header_text"
+      app:displayHeader="true"
       />
   <Button
       android:id="@+id/done_button"

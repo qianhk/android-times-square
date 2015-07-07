@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -109,6 +110,20 @@ class MonthView extends LinearLayout {
         mTvTitle = (TextView) inflateView.findViewById(R.id.tv_title);
         inflateView = inflater.inflate(R.layout.month_grid, this);
         mGridView = (CalendarGridView) inflateView.findViewById(R.id.calendar_grid);
+
+        final Locale locale = Locale.getDefault();
+        SimpleDateFormat weekdayNameFormat = new SimpleDateFormat(context.getString(R.string.day_name_format), locale);
+
+        mRtl = isRtl(locale);
+        final Calendar today = Calendar.getInstance(locale);
+        int firstDayOfWeek = today.getFirstDayOfWeek();
+        final CalendarRowView headerRow = (CalendarRowView) mGridView.getChildAt(0);
+        for (int offset = 0; offset < 7; offset++) {
+            today.set(Calendar.DAY_OF_WEEK, getDayOfWeek(firstDayOfWeek, offset, mRtl));
+            final TextView textView = (TextView) headerRow.getChildAt(offset);
+            textView.setText(weekdayNameFormat.format(today.getTime()));
+        }
+        today.set(Calendar.DAY_OF_WEEK, firstDayOfWeek);
     }
 
     public void setDecoratorList(List<CalendarCellDecorator> decoratorList) {
