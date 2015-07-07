@@ -2,6 +2,8 @@ package com.squareup.timessquare;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -10,7 +12,11 @@ import static java.util.Calendar.*;
 
 public class CalendarView extends MonthView {
 
+    private TextView mTvLeftMonth;
+    private TextView mTvRightMonth;
+
     private Calendar mTodayCalendar;
+    private Calendar mDisplayMonth;
 
     final List<MonthCellDescriptor> mSelectedCellList = new ArrayList<MonthCellDescriptor>();
     final List<Calendar> mSelectedCalendarList = new ArrayList<Calendar>();
@@ -59,24 +65,52 @@ public class CalendarView extends MonthView {
     private void initConstruct(Context context) {
         mTodayCalendar = Calendar.getInstance(Locale.getDefault());
         setListener(mListener);
+        mTvLeftMonth = (TextView) mTitleView.findViewById(R.id.tv_left_month);
+        mTvRightMonth = (TextView) mTitleView.findViewById(R.id.tv_right_month);
+        mTvLeftMonth.setOnClickListener(mOnClickListener);
+        mTvRightMonth.setOnClickListener(mOnClickListener);
     }
 
-    public void setDate(Date date, boolean selected) {
+    private OnClickListener mOnClickListener = new OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            if (v == mTvLeftMonth || v == mTvRightMonth) {
+                if (v == mTvLeftMonth) {
+                    mDisplayMonth.add(MONTH, -1);
+                } else {
+                    mDisplayMonth.add(MONTH, 1);
+                }
+                setDate(mDisplayMonth.getTime(), false);
+            }
+        }
+    };
+
+    @Override
+    int titleLayoutId() {
+        return R.layout.calendar_title;
+    }
+
+    public void setDate(Date date) {
+        setDate(date, true);
+    }
+
+    private void setDate(Date date, boolean selected) {
         if (selected) {
             clearAllOldSelections();
         } else {
             clearOldCellSelections();
         }
-        Calendar monthCounter = Calendar.getInstance();
-        monthCounter.setTime(date);
+        mDisplayMonth = Calendar.getInstance();
+        mDisplayMonth.setTime(date);
         if (selected) {
-            mSelectedCalendarList.add(monthCounter);
+            mSelectedCalendarList.add(mDisplayMonth);
         }
 
         Locale locale = Locale.getDefault();
         SimpleDateFormat monthNameFormat = new SimpleDateFormat(getContext().getString(R.string.month_name_format), locale);
-        MonthDescriptor month = new MonthDescriptor(monthCounter.get(MONTH), monthCounter.get(YEAR), date, monthNameFormat.format(date));
-        final List<List<MonthCellDescriptor>> monthCells = getMonthCells(month, monthCounter.getTime());
+        MonthDescriptor month = new MonthDescriptor(mDisplayMonth.get(MONTH), mDisplayMonth.get(YEAR), date, monthNameFormat.format(date));
+        final List<List<MonthCellDescriptor>> monthCells = getMonthCells(month, mDisplayMonth.getTime());
         initData(month, monthCells, false, null, null);
     }
 

@@ -24,6 +24,7 @@ class MonthView extends LinearLayout {
     private List<CalendarCellDecorator> mDecoratorList;
     private boolean mRtl;
     private Listener mListener;
+    View mTitleView;
 
     public void initMothViewProperty(DateFormat weekdayNameFormat, Listener listener, Calendar today, int dividerColor
             , int dayBackgroundResId, int dayTextColorResId, int titleTextColor, boolean displayHeader
@@ -106,9 +107,9 @@ class MonthView extends LinearLayout {
     private void initConstruct(Context context) {
         setOrientation(VERTICAL);
         final LayoutInflater inflater = LayoutInflater.from(context);
-        View inflateView = inflater.inflate(R.layout.month_title, this);
-        mTvTitle = (TextView) inflateView.findViewById(R.id.tv_title);
-        inflateView = inflater.inflate(R.layout.month_grid, this);
+        mTitleView = inflater.inflate(titleLayoutId(), this);
+        mTvTitle = (TextView) mTitleView.findViewById(R.id.tv_title);
+        View inflateView = inflater.inflate(R.layout.month_grid, this);
         mGridView = (CalendarGridView) inflateView.findViewById(R.id.calendar_grid);
 
         final Locale locale = Locale.getDefault();
@@ -124,6 +125,10 @@ class MonthView extends LinearLayout {
             textView.setText(weekdayNameFormat.format(today.getTime()));
         }
         today.set(Calendar.DAY_OF_WEEK, firstDayOfWeek);
+    }
+
+    int titleLayoutId() {
+        return R.layout.month_title;
     }
 
     public void setDecoratorList(List<CalendarCellDecorator> decoratorList) {

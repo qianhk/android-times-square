@@ -48,7 +48,7 @@ public class SingleMonthActivity extends Activity {
         setContentView(R.layout.single_month_page);
         CalendarView monthView = (CalendarView) findViewById(R.id.month_view);
         Logr.d("lookMonth findViewById month_view");
-        monthView.setDate(new Date(2015 - 1900, 6, 20), false);
+        monthView.setDate(new Date(2015 - 1900, 6, 20));
     }
 
 
