@@ -827,7 +827,7 @@ public class CalendarPickerView extends ListView {
         return containsDate(selectedCals, cal);
     }
 
-    private static boolean containsDate(List<Calendar> selectedCals, Calendar cal) {
+    public static boolean containsDate(List<Calendar> selectedCals, Calendar cal) {
         for (Calendar selectedCal : selectedCals) {
             if (sameDate(cal, selectedCal)) {
                 return true;
