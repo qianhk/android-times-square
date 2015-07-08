@@ -19,6 +19,23 @@
         app:dividerColor="@color/transparent"
         app:titleTextColor="@color/yd_calendar_day_text_selector"
         app:headerTextColor="@color/yd_calendar_day_text_selector"
-        app:displayHeader="true"
-        />
+        app:displayHeader="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_now_date"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_now_date"
+            android:text="now date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </LinearLayout>
